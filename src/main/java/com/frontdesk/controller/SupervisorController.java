@@ -4,6 +4,7 @@ import com.frontdesk.model.HelpRequest;
 import com.frontdesk.repository.HelpRequestRepository;
 import com.frontdesk.service.AIService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -12,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api/supervisor")
 @RequiredArgsConstructor
 public class SupervisorController {
-    private final HelpRequestRepository hrRepo;
-    private final AIService aiService;
+
+    @Autowired
+    private HelpRequestRepository hrRepo;
+
+    @Autowired
+    private AIService aiService;
 
     @GetMapping("/help-requests")
     public List<HelpRequest> getPending() { return hrRepo.findByStatus("PENDING"); }

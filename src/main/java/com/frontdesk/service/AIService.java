@@ -5,6 +5,7 @@ import com.frontdesk.model.LearnedAnswer;
 import com.frontdesk.repository.HelpRequestRepository;
 import com.frontdesk.repository.LearnedAnswerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -13,9 +14,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AIService {
 
-    private final LearnedAnswerRepository answerRepo;
-    private final HelpRequestRepository helpRequestRepo;
-    private final OpenAIService openAIService;
+    @Autowired
+    private LearnedAnswerRepository answerRepo;
+
+    @Autowired
+    private HelpRequestRepository helpRequestRepo;
+
+    @Autowired
+    private OpenAIService openAIService;
 
     public String handleIncomingCall(String callerId, String question) {
         Optional<LearnedAnswer> known = answerRepo.findByQuestion(question);

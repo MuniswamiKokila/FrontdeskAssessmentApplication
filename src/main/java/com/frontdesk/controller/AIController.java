@@ -2,6 +2,7 @@ package com.frontdesk.controller;
 
 import com.frontdesk.service.AIService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/ai")
 @RequiredArgsConstructor
 public class AIController {
-    private final AIService aiService;
+    @Autowired
+    private AIService aiService;
 
     @PostMapping("/call")
     public ResponseEntity<String> receiveCall(@RequestParam String callerId, @RequestParam String question) {
