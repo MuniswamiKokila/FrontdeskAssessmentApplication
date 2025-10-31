@@ -1,5 +1,6 @@
 package com.frontdesk.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -10,11 +11,13 @@ import java.util.*;
 @Service
 public class OpenAIService {
     @Value("${openai.api.key}")
-    private String openAiApiKey;
+    String openAiApiKey;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public String getAIAnswer(String prompt) {
         try {
-            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", "Bearer " + openAiApiKey);
             headers.setContentType(MediaType.APPLICATION_JSON);
